@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 
 
-export default class App extends Component {
+export  class App extends React.Component {
   state = {
     good: 0,
     neutral: 0,
@@ -12,5 +12,41 @@ export default class App extends Component {
   handleFeedback = event => {
     const score = event.target.name;
     this.setState(state => ({ [score]: state[score] + 1}));
+  }
+
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  }
+
+  countPositiveFeedbackPercentage = () => {
+    const { good } = this.state;
+    const persent = Math.round((good / this.countTotalFeedback()) * 100);
+    return percent;
+  }
+
+  render() {
+    const { good, neutral, bad } = this.state;
+    const options = [ 'good', 'neutral', 'bad'];
+    return (
+      <Container>
+        <Section title = 'Please leave feedback'>
+          <FeedbackOptions handle={this.handleFeedback} options={options} />
+        </Section>
+        <Section title = 'Statistics'> 
+          {this.countTotalFeedback() > 0 ? (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              totalFeedback={this.countTotalFeedback()}
+              positiveFeedback={this.countPositiveFeedbackPercentage()}
+            ></Statistics>
+          ) : (
+            <Notification message={'There is no feedback'} />
+          )}
+        </Section>
+      </Container>
+    )
   }
 }
