@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 export const ButtonContainer = styled.div`
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
 `;
 
 export const ButtonFeedBack = styled.button`
@@ -17,6 +17,6 @@ export const ButtonFeedBack = styled.button`
 
     :hover {
         cursor: pointer;
-        background: #44728f;
+        background: #5fa9d7;
     }
 `;
